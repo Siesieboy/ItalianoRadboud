@@ -1,0 +1,185 @@
+/* Global Flexbox Setup voor Layout */
+body {
+    font-family: 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f3e8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header (Blijft bovenaan) */
+header {
+    background-color: #a80000;
+    color: white;
+    padding: 20px 0;
+    text-align: center; 
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-family: 'Arial Black', sans-serif;
+    letter-spacing: 2px;
+}
+
+/* Navigatiebalk */
+nav {
+    background-color: #c94040;
+    text-align: center;
+    padding: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; 
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin: 0 15px;
+}
+
+/* Afgeronde knoppen */
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: #a80000;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    display: block;
+    cursor: pointer;
+}
+
+nav a:hover {
+    background-color: #800000;
+}
+
+/* Hoofdinhoud Container (Centrering) */
+.main-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-grow: 1; 
+    padding: 20px; 
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+/* Hoofdinhoud secties (de witte vlakken) */
+.content-section {
+    padding: 40px;
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    width: 100%; 
+    
+    max-height: 80vh; 
+    overflow-y: auto;
+    
+    margin: 0 auto; 
+}
+
+.content-section.active {
+    display: block;
+}
+
+/* Tekst alignment in de content secties (links uitlijnen voor betere leesbaarheid) */
+.content-section p, 
+.content-section ul,
+.content-section ol {
+    text-align: left;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Stijl voor formulier inputs (omdat de input type nu text is) */
+#orderformulier input[type="text"], 
+#orderformulier input[type="tel"],
+#orderformulier input[type="time"],
+#orderformulier input[type="email"],
+#orderformulier textarea {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box;
+}
+
+.content-section h2, .content-section h3 {
+    color: #a80000;
+    border-bottom: 2px solid #a80000;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+/* Menu Tabel Stijl */
+#menu table, .content-section table {
+    width: 100%;
+    border-collapse: collapse;
+    max-width: 900px; 
+    margin: 20px auto;
+    text-align: left;
+}
+
+.content-section th {
+    color: #a80000;
+    padding: 10px 15px 5px 15px; 
+    border-bottom: 1px solid #c94040;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.content-section td {
+    padding: 10px 15px;
+    border-bottom: 1px dotted #ccc;
+}
+
+.content-section td:last-child {
+    text-align: right;
+    font-weight: bold;
+    width: 80px; 
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #a80000;
+    color: white;
+    flex-shrink: 0; 
+}
+
+/* Hero Sectie */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    width: 100%;
+}
+
+.hero h2 {
+    font-size: 3em;
+}
+
+/* Disabled button styling */
+button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

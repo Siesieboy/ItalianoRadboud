@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italiano Radboud - Bestelformulier</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+</head>
+<body>
+    <header>
+        <h1>Italiano Radboud 🇮🇹</h1>
+        <p>Proef de passie van de Italiaanse keuken, af te halen bij u in de buurt.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Welkom</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="overmij.html">Over mij</a></li>
+            <li><a href="info.html">Info</a></li>
+            <li><a href="afhalen.html">Bestellen</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        <div class="content-section active">
+            <h2>Je Bestelling Snel Doorgeven 🚀</h2>
+            <p>Vul dit formulier in om je bestelling en gegevens door te geven. Wij nemen via de mail contact met je op om de afhaaltijd en details te bevestigen.</p>
+            <p>Let op! Op Apple opent dit formulier een concept met info om een mail naar mij te sturen, het is belangrijk dat die mail word verstuurd!</p>
+            <p><h3>Zo werkt het:</h3>
+            <ol>
+                <li>Kies uw favoriete gerechten uit ons uitgebreide menu.</li>
+                <li>Vul dit formulier in en geef uw bestelling door.</li>
+                <li>Geef het gewenste afhaalmoment door.</li>
+                <li>Betaal contant of via betaalverzoek bij afhalen.</li>
+                <li>Kom op het afgesproken tijdstip langs bij de locatie.</li>
+                <li>Gelieve minimaal 2 dagen van te voren te bestellen.</li>
+            </ol>
+            </p>
+
+            <form id="orderForm" action="/submit-online-order" method="post" style="text-align: left; max-width: 600px; margin: 20px auto 40px auto;">
+
+                <h3>1. Je Gegevens</h3><br>
+                <label for="naam_form">Volledige Naam:</label><br>
+                <input type="text" id="naam_form" name="naam" required><br>
+                
+                <label for="email_form">E-mailadres (Voor definitieve bevestiging!):</label><br>
+                <input type="email" id="email_form" name="email" required><br>
+
+                <label for="telefoon_form">Telefoonnummer (Optioneel):</label><br>
+                <input type="tel" id="telefoon_form" name="telefoon"><br>
+        
+                <h3>2. Afhaalmoment en Bestelling</h3><br>
+                <label for="afhaaldatum_form">Gewenste Afhaaldatum (Alleen Vrijdag t/m Zondag):</label><br>
+                <input type="text" id="afhaaldatum_form" name="afhaaldatum" required readonly="readonly"><br>
+                
+                <label for="afhaaltijd_uur">Gewenste Afhaaltijd (17:00 - 19:00):</label><br>
+                <input type="time" id="afhaaltijd_uur" name="afhaaltijd_uur" required min="17:00" max="19:00" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"><br>
+
+                <label for="bestelling_form">Bestelling (Gerecht + Aantal, bijv. 1x Lasagna, 2x Tiramisu):</label><br>
+                <textarea id="bestelling_form" name="bestelling" rows="8" required></textarea><br>
+
+                <h3>3. Opmerkingen</h3><br>
+                <label for="opmerkingen_form">Allergieën of speciale wensen:</label><br>
+                <textarea id="opmerkingen_form" name="opmerkingen" rows="3"></textarea><br>
+
+                <button type="submit" id="submitbestelling" disabled style="background-color: #a80000; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1.1em; width: 100%;">Bestelling Doorgeven</button>
+                <div id="formStatus" aria-live="polite" style="text-align:center; color:#a80000; margin-top:10px; font-weight:600; display:none;">Vul eerst alle verplichte velden in.</div>
+                <p style="text-align: center; margin-top: 15px; font-size: 0.9em; color: #555;">Na het verzenden mailen wij u op het opgegeven e-mail adres ter definitieve bevestiging.</p>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Italiano Radboud. Alle rechten voorbehouden.</p>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="orderformulier.js"></script>
+</body>
+</html>
