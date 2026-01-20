@@ -39,11 +39,12 @@
         const emailform = document.getElementById('email_form').value;
         const telefoonform = document.getElementById('telefoon_form').value;
         const afhaaldatumform = document.getElementById('afhaaldatum_form').value;
+        const afhaaltijduur = document.getElementById('afhaaltijd_uur').value;
         const bestellingform = document.getElementById('bestelling_form').value;
         const opmerkingenform = document.getElementById('opmerkingen_form').value;
 
         // Build mailto and open in a new window
-        const mailto = `mailto:siespasteuning@icloud.com?subject=Nieuwe Bestelling van ${encodeURIComponent(naamform)}&body=Naam: ${encodeURIComponent(naamform)}%0D%0AEmail: ${encodeURIComponent(emailform)}%0D%0ATelefoonnummer: ${encodeURIComponent(telefoonform)}%0D%0AAfhaaldatum: ${encodeURIComponent(afhaaldatumform)}%0D%0ABestelling:%0D%0A${encodeURIComponent(bestellingform)}%0D%0AOpmerkingen:%0D%0A${encodeURIComponent(opmerkingenform)}`;
+        const mailto = `mailto:siespasteuning@icloud.com?subject=Nieuwe Bestelling van ${encodeURIComponent(naamform)}&body=Naam: ${encodeURIComponent(naamform)}%0D%0AEmail: ${encodeURIComponent(emailform)}%0D%0ATelefoonnummer: ${encodeURIComponent(telefoonform)}%0D%0AAfhaaldatum: ${encodeURIComponent(afhaaldatumform)}%0D%0AAfhaaltijd: ${encodeURIComponent(afhaaltijduur)}%0D%0ABestelling:%0D%0A${encodeURIComponent(bestellingform)}%0D%0AOpmerkingen:%0D%0A${encodeURIComponent(opmerkingenform)}`;
         window.open(mailto, '_blank');
     });
 })();
