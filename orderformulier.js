@@ -1,52 +1,72 @@
-// Form validation & mailto on valid submit
-(function() {
-    const form = document.getElementById('orderForm');
-    const submitBtn = document.getElementById('submitbestelling');
-    const status = document.getElementById('formStatus');
+// Form validation & API submit
+(function () {
+  const form = document.getElementById("orderForm");
+  const submitBtn = document.getElementById("submitbestelling");
+  const status = document.getElementById("formStatus");
 
-    function updateSubmitState() {
-        // checkValidity covers required and min/max for time
-        if (form.checkValidity()) {
-            submitBtn.disabled = false;
-            status.style.display = 'none';
-        } else {
-            submitBtn.disabled = true;
-            status.style.display = 'block';
-        }
+  function updateSubmitState() {
+    if (form.checkValidity()) {
+      submitBtn.disabled = false;
+      status.style.display = "none";
+    } else {
+      submitBtn.disabled = true;
+      status.style.display = "block";
+    }
+  }
+
+  const inputs = form.querySelectorAll("input[required], textarea[required]");
+  inputs.forEach(el => {
+    el.addEventListener("input", updateSubmitState);
+    el.addEventListener("change", updateSubmitState);
+  });
+
+  updateSubmitState();
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+
+    if (!form.checkValidity()) {
+      status.textContent = "Controleer de verplichte velden en probeer opnieuw.";
+      status.style.display = "block";
+      return;
     }
 
-    // Observe all required fields & time input to react to changes
-    const inputs = form.querySelectorAll('input[required], textarea[required]');
-    inputs.forEach(el => {
-        el.addEventListener('input', updateSubmitState);
-        el.addEventListener('change', updateSubmitState);
-    });
+    const formData = new FormData();
+    formData.append("naam", document.getElementById("naam_form").value);
+    formData.append("email", document.getElementById("email_form").value);
+    formData.append("tel", document.getElementById("telefoon_form").value);
+    formData.append("afhaaldatum", document.getElementById("afhaaldatum_form").value);
+    formData.append("afhaaltijd", document.getElementById("afhaaltijd_uur").value);
+    formData.append("bestelling", document.getElementById("bestelling_form").value);
+    formData.append("opmerkingen", document.getElementById("opmerkingen_form").value);
 
-    // run on load in case some browsers autofill
-    updateSubmitState();
+    submitBtn.disabled = true;
 
-    // When the form is submitted, validate again and open mail client
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        if (!form.checkValidity()) {
-            // This should not be reachable when the button is disabled, but protects anyway
-            status.textContent = 'Controleer de verplichte velden en probeer opnieuw.';
-            status.style.display = 'block';
-            return;
+    try {
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbz5fhGZrF824qgTpof0A9F5ntMpDWJIqL1mbJltgEdPtiPympDY5Lqcy6H3f5xS0DJ0/exec",
+        {
+          method: "POST",
+          body: formData
         }
+      );
 
-        const naamform = document.getElementById('naam_form').value;
-        const emailform = document.getElementById('email_form').value;
-        const telefoonform = document.getElementById('telefoon_form').value;
-        const afhaaldatumform = document.getElementById('afhaaldatum_form').value;
-        const afhaaltijduur = document.getElementById('afhaaltijd_uur').value;
-        const bestellingform = document.getElementById('bestelling_form').value;
-        const opmerkingenform = document.getElementById('opmerkingen_form').value;
+      const json = await res.json();
 
-        // Build mailto and open in a new window
-        const mailto = `mailto:siespasteuning@icloud.com?subject=Nieuwe Bestelling van ${encodeURIComponent(naamform)}&body=Naam: ${encodeURIComponent(naamform)}%0D%0AEmail: ${encodeURIComponent(emailform)}%0D%0ATelefoonnummer: ${encodeURIComponent(telefoonform)}%0D%0AAfhaaldatum: ${encodeURIComponent(afhaaldatumform)}%0D%0AAfhaaltijd: ${encodeURIComponent(afhaaltijduur)}%0D%0ABestelling:%0D%0A${encodeURIComponent(bestellingform)}%0D%0AOpmerkingen:%0D%0A${encodeURIComponent(opmerkingenform)}`;
-        window.open(mailto, '_blank');
-    });
+      if (json.status !== "ok") {
+        throw new Error(json.message || "Onbekende fout");
+      }
+
+      alert("Bestelling verzonden");
+      form.reset();
+      updateSubmitState();
+
+    } catch (err) {
+      console.error(err);
+      alert("Fout bij verzenden");
+      submitBtn.disabled = false;
+    }
+  });
 })();
 
 // JQUERY DATUMKIEZER LOGICA
